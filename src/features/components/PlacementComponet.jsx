@@ -6,4 +6,4 @@ const PlacementComponet = () => {
   )
 }
 
-export default PlacementComponet
+export default PlacementComponet;
