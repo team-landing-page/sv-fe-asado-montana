@@ -1,12 +1,16 @@
 import { Button, Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Dashboard = () => {
   const navigateTo = useNavigate();
+  const { logout } = useAuth();
 
-  const doLogout = () => {
+  const doLogout = async () => {
+    await logout();
     navigateTo('/login');
-  }
+  };
+  
   return (
     <>
       <Box

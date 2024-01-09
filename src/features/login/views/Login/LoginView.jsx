@@ -33,7 +33,7 @@ export default function LogIn() {
       return false;
     }
     return true;
-  }
+  };
 
   const handleLogin = async () => {
     
