@@ -55,9 +55,9 @@ const  AuthProvider = ({ children }) => {
 				console.error('El formato de correo electrónico no es válido');
 				return; // Detener la solicitud si el formato de correo no es válido
 			}
-
 		const response = await signInWithEmailAndPassword(auth, email, password);
-		console.log('sigIn response ====> ', response);
+		console.log('User ====> ', response);
+		setUser(response);
 	};
 
     const logout = async () => {
