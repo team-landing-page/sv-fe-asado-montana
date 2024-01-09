@@ -23,7 +23,7 @@ const  AuthProvider = ({ children }) => {
   const [user, setUser] = useState('');
 
 	useEffect( () => {
-		const suscribed = onAuthStateChanged(auth, (currentUser)=>{
+		const suscribed = onAuthStateChanged(auth, (currentUser) => {
 			if(!currentUser){
 				console.log('no hay usuario suscrito');
 				setUser('');
@@ -57,7 +57,7 @@ const  AuthProvider = ({ children }) => {
 			}
 
 		const response = await signInWithEmailAndPassword(auth, email, password);
-		console.log(response);
+		console.log('sigIn response ====> ', response);
 	};
 
     const logout = async () => {
@@ -78,7 +78,7 @@ const  AuthProvider = ({ children }) => {
 };
 
 AuthProvider.propTypes = {
-    children: PropTypes.elementType
+    children: PropTypes.object
 }
 
 export default AuthContext;
