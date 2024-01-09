@@ -4,29 +4,21 @@ Fecha de creación: 14/12/2023
 Fecha de modificación: 15/12/2023
 Descripción: Funciones para el registro e inicio de sesión con Firebase.
 */
-
-import {auth} from "../firebase/firebase.integration";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { 
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
 	onAuthStateChanged,
 } from "firebase/auth";
+import PropTypes from 'prop-types';
 
-export const authContext = createContext();
+import { auth } from "../firebase/firebase.integration";
+import { isEmailValid, isPasswordValid } from "../utils/validators";
 
-export const useAuth = () => {
-  const context = useContext(authContext);
-    
-	if(!context){
-			console.error('error creando el contexto auth');
-	}
+const AuthContext = createContext();
 
-  return context;
-}
-
-export function AuthProvider({children}){
+const  AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState('');
 
@@ -41,16 +33,7 @@ export function AuthProvider({children}){
 		})
 
 		return () => suscribed();
-	}, [] )
-
-	const isEmailValid = (email) => {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailRegex.test(email);
-	};
-
-	const isPasswordValid = (password) => {
-        return password.length >= 6;
-    };
+	}, [] );
 
 	const register = async (email, password) => {
 		if (!isEmailValid(email)) {
@@ -82,7 +65,7 @@ export function AuthProvider({children}){
 			console.log(response);
     }
 
-    return <authContext.Provider
+    return <AuthContext.Provider
 			value={{
 				register,
 				login,
@@ -91,5 +74,14 @@ export function AuthProvider({children}){
 			}}
 			>
       {children}
-    </authContext.Provider>
+    </AuthContext.Provider>
+};
+
+AuthProvider.propTypes = {
+    children: PropTypes.elementType
+}
+
+export default AuthContext;
+export {
+	AuthProvider,
 }
