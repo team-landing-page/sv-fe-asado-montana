@@ -1,12 +1,13 @@
 import { Navigate } from "react-router-dom";
 import PropTypes from 'prop-types';
+
 import useAuth from "../hooks/useAuth";
+import LoadingSpinner from "../features/components/LoadingSpinner";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user, loading } = useAuth();
   if (loading) {
-    // TODO: create loading component for this...
-    return <p>Cargando....</p>;
+    return <LoadingSpinner message="Cargando..."/>;
   }
   if (Object.keys(user).length > 0) {
     return <Component {...rest} /> ;
