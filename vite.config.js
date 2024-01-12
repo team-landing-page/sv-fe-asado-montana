@@ -1,4 +1,4 @@
-import { defineConfig, preview } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 //vite (correr en desarrollo, en un servidor local)
