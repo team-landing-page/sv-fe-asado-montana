@@ -1,14 +1,19 @@
 import { Button, Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const navigateTo = useNavigate();
   const { logout } = useAuth();
 
   const doLogout = async () => {
-    await logout();
-    navigateTo('/login');
+    try {
+      await logout();
+      navigateTo('/login'); 
+    } catch (error) {
+      toast.error('Error al cerrar sesión,\nInténtalo de nuevo en unos minutos.')
+    }
   };
   
   return (

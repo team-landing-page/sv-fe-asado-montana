@@ -6,7 +6,7 @@ const errorMessages = [
     {id: 'auth/email-already-in-use', message: 'El correo electrónico ha sido registrado'},
     {id: 'auth/invalid-email', message: 'Correo no válido'},
     {id: 'auth/popup-closed-by-user', message: 'Inicio de sesión incompleto'},
-    {id: 'auth/account-exists-with-different-credential', message: 'Credenciales de cuenta no coinciden'},
+    {id: 'auth/account-exists-with-different-credential', message: 'Credenciales de cuenta incorrectas'},
     {id: 'auth/network-request-failed', message: 'Error de red'},
 
 ]

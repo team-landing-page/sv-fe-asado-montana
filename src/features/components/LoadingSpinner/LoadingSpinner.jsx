@@ -1,6 +1,6 @@
 import { CircularProgress, Box, Typography } from '@mui/material';
 import PropTypes from "prop-types";
-
+import "./LoadingSpinnerStyles.css"
 const LoadingSpinner = ({ message = 'Loading...' }) => {
   return (
     <Box
@@ -11,7 +11,7 @@ const LoadingSpinner = ({ message = 'Loading...' }) => {
       height="100vh"
     >
       <CircularProgress color="primary" size={80} />
-      <Typography variant="body2" color="#fff" style={{ marginTop: 8, fontWeight: 700 }}>
+      <Typography variant="body2" className='spinnerTypografy'>
         {message}
       </Typography>
     </Box>

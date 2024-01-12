@@ -69,9 +69,10 @@ const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await signOut(auth);
-      setUser({}); 
+      setUser({});
     } catch (error) {
       console.error('An error has ocurred trying to logout', error.message);
+      throw new Error(error.message); 
     }
   };
 
