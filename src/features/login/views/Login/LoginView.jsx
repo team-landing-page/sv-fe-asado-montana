@@ -58,7 +58,7 @@ export default function LogIn() {
   return (
     <Grid container style={{ height: '100vh' }}>
       <Grid item xs={0} sm={0} md={7} lg={6} className="imageColumnLogin" style={{ 
-        backgroundImage: 'url("src/features/login/utils/Intersect1.webp")',
+  backgroundImage: 'url("/utils/Intersect1.webp")',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'right',
@@ -73,7 +73,7 @@ export default function LogIn() {
         <Box
           component="img"
           alt="The house from the offer."
-          src="src/features/login/utils/Asadosdelamontaña.png"
+    src="/utils/Asadosdelamontaña.png"
           width={{ xs: '200px', sm: '225px', md: '225px', lg: '250px' }}
           margin="40px auto 40px auto">
         </Box>
