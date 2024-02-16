@@ -41,7 +41,9 @@ const parseDocumentToJson = ({ fields, name, createTime, updateTime }) => {
  * @returns
  */
 const parseJsonToDocument = (json) => {
-  const fields = mapObject(json, (value) => ({
+  // eslint-disable-next-line no-unused-vars
+  const { id, createTime, updateTime, ...rest } = json;
+  const fields = mapObject(rest, (value) => ({
     [fieldTypes[typeof value]]: value,
   }));
   return { fields };
