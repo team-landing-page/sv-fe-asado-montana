@@ -8,6 +8,9 @@ import Customers from '../features/customers/Customers';
 import Menus from '../features/menus/Menus';
 import Orders from '../features/orders/Orders';
 
+//testing
+import FirestoreTesting from '../tests/components/FirestoreTesting';
+
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -24,7 +27,7 @@ export const router = createBrowserRouter([
         /**
          * To implement a route in the menu item must be added here
          */
-       children: [
+        children: [
             {
                 index: true,
                 element: <PrivateRoute component={Dashboard} />
@@ -42,5 +45,10 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute component={Orders} />
             },
         ]
+    },
+    {
+        path: '/firestore',
+        element: <PrivateRoute component={FirestoreTesting} />
+
     }
 ]);

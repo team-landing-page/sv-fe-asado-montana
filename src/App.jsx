@@ -6,13 +6,16 @@ import "./App.css";
 import { theme } from "./utils/LightTheme";
 import { router } from "./router/router";
 import { AuthProvider } from "./context/authContext";
+import { FirestoreProvider } from "./context/firestoreContext";
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <RouterProvider router={router} />
-        <ToastContainer />
+        <FirestoreProvider>
+          <RouterProvider router={router} />
+          <ToastContainer />
+        </FirestoreProvider>
       </AuthProvider>
     </ThemeProvider>
   );
