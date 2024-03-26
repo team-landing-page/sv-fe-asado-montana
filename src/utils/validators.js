@@ -8,7 +8,8 @@ export const isPasswordValid = (password) => {
 };
 
 export const validateEnvs = (config) => {
-    // add required envs to validate for other developers
+    // add required environment variables to avoid loss
+    // of any variable in every stage or for any developer.
     const requiredKeys = [
       'FIREBASE_API_KEY',
       'FIREBASE_AUTH_DOMAIN',
@@ -18,10 +19,9 @@ export const validateEnvs = (config) => {
       'FIREBASE_APP_ID',
     ];
   
-    // Check if all required keys are present and have non-empty values
     for (const key of requiredKeys) {
       if (!(key in config) || !config[key]) {
-        console.error(`Variable ${key} is not defined`);
+        throw new Error(`Variable ${key} is not defined`);
       }
     }
   
