@@ -13,17 +13,34 @@ import {
 } from "firebase/auth";
 import PropTypes from "prop-types";
 
-import { auth } from "../firebase/firebase.integration";
+import { FirebaseAdapter } from "../firebase/firebase.integration";
 import { isEmailValid, isPasswordValid } from "../utils/validators";
+import useEnv from "../hooks/useEnv";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const {
+    FIREBASE_API_KEY,
+    FIREBASE_AUTH_DOMAIN,
+    FIREBASE_PRJECT_ID,
+    FIREBASE_STORAGE_BUCKET,
+    FIREBASE_MESSAGE_SENDER_ID,
+    FIREBASE_APP_ID,
+  } = useEnv();
+  const firebase = new FirebaseAdapter({
+    FIREBASE_API_KEY,
+    FIREBASE_AUTH_DOMAIN,
+    FIREBASE_PRJECT_ID,
+    FIREBASE_STORAGE_BUCKET,
+    FIREBASE_MESSAGE_SENDER_ID,
+    FIREBASE_APP_ID,
+  });
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(firebase.getAuthentication(), (currentUser) => {
       if (!currentUser) {
         console.log('no hay usuario suscrito');
         setUser({});
@@ -50,7 +67,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const response = await createUserWithEmailAndPassword(
-      auth,
+      firebase.getAuthentication(),
       email,
       password
     );
@@ -62,13 +79,13 @@ const AuthProvider = ({ children }) => {
       console.error('El formato de correo electrónico no es válido');
       return; // Detener la solicitud si el formato de correo no es válido
     }
-    const response = await signInWithEmailAndPassword(auth, email, password);
+    const response = await signInWithEmailAndPassword(firebase.getAuthentication(), email, password);
     setUser(response);
   };
 
   const logout = async () => {
     try {
-      await signOut(auth);
+      await signOut(firebase.getAuthentication());
       setUser({});
     } catch (error) {
       console.error('An error has ocurred trying to logout', error.message);

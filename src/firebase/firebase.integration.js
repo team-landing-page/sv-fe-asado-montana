@@ -8,16 +8,32 @@ Descripción: Se inicializan las configuraciones de Firebase con el aplicativo.
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
 
-const firebaseConfig = {
+export class FirebaseAdapter {
+  static app;
+  constructor(firebaseConfig) {
+    if (!this.app) {
+      const {
+        FIREBASE_API_KEY,
+        FIREBASE_AUTH_DOMAIN,
+        FIREBASE_PRJECT_ID,
+        FIREBASE_STORAGE_BUCKET,
+        FIREBASE_MESSAGE_SENDER_ID,
+        FIREBASE_APP_ID,
+      } = firebaseConfig;
+      this.app = initializeApp({
+        apiKey: FIREBASE_API_KEY,
+        authDomain: FIREBASE_AUTH_DOMAIN,
+        projectId: FIREBASE_PRJECT_ID,
+        storageBucket: FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: FIREBASE_MESSAGE_SENDER_ID,
+        appId: FIREBASE_APP_ID,
+      });
+    }
+  }
 
-  apiKey: "AIzaSyC9qHs53-TbT66zAUU12DQb1ad0tPjDdqc",
-  authDomain: "sv-asado-montana.firebaseapp.com",
-  projectId: "sv-asado-montana",
-  storageBucket: "sv-asado-montana.appspot.com",
-  messagingSenderId: "734214845101",
-  appId: "1:734214845101:web:c7bf4083b8eb4623b94c24"
+  getAuthentication() {
+    if (!this.app) throw new Error('App is undefined');
+    return getAuth(this.app);
+  }
 
-};
-
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+}
